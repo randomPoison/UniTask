@@ -33,19 +33,34 @@ public class ExceptionExamples : MonoBehaviour
 
     private async void ThrowFromAsyncVoid()
     {
-        await UniTask.Yield();
-        throw new Exception("Thrown from `async void` function");
+        await ThrowInner();
+
+        async Task ThrowInner()
+        {
+            await UniTask.Yield();
+            throw new Exception("Thrown from `async void` function");
+        }
     }
 
     private async Task ThrowFromTask()
     {
-        await UniTask.Yield();
-        throw new Exception("Thrown from `async Task` function");
+        await ThrowInner();
+
+        async Task ThrowInner()
+        {
+            await UniTask.Yield();
+            throw new Exception("Thrown from `async Task` function");
+        }
     }
 
     private async UniTask ThrowFromUniTask()
     {
-        await UniTask.Yield();
-        throw new Exception("Thrown from `async UniTask` function");
+        await ThrowInner();
+
+        async UniTask ThrowInner()
+        {
+            await UniTask.Yield();
+            throw new Exception("Thrown from `async UniTask` function");
+        }
     }
 }
